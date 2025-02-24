@@ -1,0 +1,1 @@
+archivo para que se suba el directorio store al remote host, si esta bacio no lo sube xd, aunque podria crearlo en el dockerfile pero no quiero :v

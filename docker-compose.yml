@@ -1,0 +1,7 @@
+services:
+  signer:
+    build: .
+    command: /app/bin/signer.app
+    volumes:
+      - ./store:/app/store
+      - ./assets:/app/assets

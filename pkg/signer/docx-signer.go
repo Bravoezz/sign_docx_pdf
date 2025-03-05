@@ -22,7 +22,12 @@ func (sg DocxSigner) SignDocument(op SignOp) error {
 	//aqui convertir el word a pdf
 	basePath, _ := os.Getwd()
 	convertPath := path.Join(basePath, "assets")
-	cmd := exec.Command("libreoffice", "--headless", "--convert-to", "pdf", op.InputPath, "--outdir", convertPath)
+	cmd := exec.Command("libreoffice",
+		"--headless",
+		"--convert-to",
+		"pdf", op.InputPath,
+		"--outdir", convertPath,
+	)
 	outputStr, err := cmd.CombinedOutput()
 	if err != nil {
 		return err
@@ -32,17 +37,18 @@ func (sg DocxSigner) SignDocument(op SignOp) error {
 	splitStr := strings.Split(op.InputPath, "/")
 	newNamePdf := strings.Replace(splitStr[len(splitStr)-1], ".docx", ".pdf", -1)
 	println("location new pdf convert: ", path.Join(basePath, "assets", newNamePdf))
-	txtFounded, err := utils.GetCoordinates(path.Join(basePath, "assets", newNamePdf), op.SearchText)
+	pdfPath := path.Join(basePath, "assets", newNamePdf)
+
+	txtFounded, err := utils.GetCoordinates(pdfPath, op.SearchText)
 	if err != nil {
 		return err
 	}
 
 	doc, _ := document.Open(op.InputPath)
-
 	img, _ := doc.AddImage(common.Image{
 		Size: image.Point{
-			X: 120,
-			Y: 70,
+			X: 150,
+			Y: 100,
 		},
 		Format: path.Ext(op.SignaturePath)[1:],
 		Path:   op.SignaturePath,
@@ -54,7 +60,7 @@ func (sg DocxSigner) SignDocument(op SignOp) error {
 
 	x, y := sg.convertPDFToWordCoordinates(txtFounded.X, txtFounded.Y)
 
-	drawing.SetOffset(x, y-75)
+	drawing.SetOffset(x, y-210)
 	drawing.SetTextWrapNone()
 
 	if err := doc.SaveToFile(op.OutputPath); err != nil {

@@ -6,14 +6,13 @@ import (
 	"log"
 	"os"
 	"path"
-	"time"
 )
 
 func main() {
 	basePath, _ := os.Getwd()
 	const (
-		docPath    = "renuncia-single-sign.docx"
-		outputPath = "output-sign.docx"
+		docPath    = "renuncia.pdf"
+		outputPath = "output-sign.pdf"
 		imagePath  = "firma-final.png"
 		searchText = "Bravo Ramos Joel Brayan"
 	)
@@ -47,9 +46,4 @@ func main() {
 	fmt.Println("✅ Imagen agregada correctamente en:", outputPath)
 
 	println("***EXIT PROGRAM***")
-
-	for {
-		println("Esperando 1 hora para test")
-		<-time.After(time.Hour)
-	}
 }

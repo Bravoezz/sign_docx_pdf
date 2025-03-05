@@ -1,14 +1,9 @@
-#build stage
+# Build stage
 FROM golang:1.23.1-alpine AS build
-
 WORKDIR /app
-
 COPY go.mod go.sum ./
 RUN go mod download
-
 COPY . .
-
-#set os as linux
 RUN GOOS=linux go build -o ./bin/signer.app ./pkg/program.go
 
 #exec stage

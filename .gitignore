@@ -1,2 +1,5 @@
 /assets/**
+!/assets/not-dead.txt
+/store/**
+!/store/not-dead.txt
 .idea

@@ -60,7 +60,7 @@ func (sg DocxSigner) SignDocument(op SignOp) error {
 
 	x, y := sg.convertPDFToWordCoordinates(txtFounded.X, txtFounded.Y)
 
-	drawing.SetOffset(x, y-210)
+	drawing.SetOffset(x, y-220)
 	drawing.SetTextWrapNone()
 
 	if err := doc.SaveToFile(op.OutputPath); err != nil {

@@ -8,5 +8,4 @@ run: build
 	./bin/${BINARY_NAME}
 
 cls:
-	rm ${OUTPUT_DOC}
 	rm ${BINARY_NAME}
